@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3151.animalgame.view.AnimalGameCodeBehind">
+	<children>
+      <Pane fx:id="welcomePane" prefHeight="400.0" prefWidth="479.0">
+         <children>
+      		<MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="479.0">
+      			<menus>
+      				<Menu fx:id="menuFile" mnemonicParsing="false" text="File">
+      					<items>
+      						<MenuItem fx:id="loadItem" mnemonicParsing="false" onAction="#loadItem" text="Load" />
+      						<MenuItem fx:id="saveItem" mnemonicParsing="false" onAction="#saveItem" text="Save" />
+      					</items>
+      				</Menu>
+      				<Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
+      					<items>
+      						<MenuItem fx:id="aboutItem" mnemonicParsing="false" onAction="#aboutItem" text="About" />
+      					</items>
+      				</Menu>
+      			</menus>
+      		</MenuBar>
+      		<Text layoutX="64.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the Animal Game!">
+      			<font>
+      				<Font size="26.0" />
+      			</font>
+      		</Text>
+            <Button fx:id="startButton" layoutX="169.0" layoutY="200.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="142.0" text="Start" />
+         </children>
+      </Pane>
+	</children>
+</AnchorPane>
