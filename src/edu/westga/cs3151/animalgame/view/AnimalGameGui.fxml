@@ -1,39 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="479.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.westga.cs3151.animalgame.view.AnimalGameCodeBehind">
 	<children>
-      <Pane fx:id="welcomePane" prefHeight="400.0" prefWidth="479.0">
+		<MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="479.0">
+			<menus>
+				<Menu fx:id="menuFile" mnemonicParsing="false" text="File">
+					<items>
+						<MenuItem fx:id="loadItem" mnemonicParsing="false" onAction="#loadItem" text="Load" />
+						<MenuItem fx:id="saveItem" mnemonicParsing="false" onAction="#saveItem" text="Save" />
+					</items>
+				</Menu>
+				<Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
+					<items>
+						<MenuItem fx:id="aboutItem" mnemonicParsing="false" onAction="#aboutItem" text="About" />
+					</items>
+				</Menu>
+			</menus>
+		</MenuBar>
+      <Pane fx:id="welcomePane" layoutY="23.0" prefHeight="377.0" prefWidth="479.0">
          <children>
-      		<MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="479.0">
-      			<menus>
-      				<Menu fx:id="menuFile" mnemonicParsing="false" text="File">
-      					<items>
-      						<MenuItem fx:id="loadItem" mnemonicParsing="false" onAction="#loadItem" text="Load" />
-      						<MenuItem fx:id="saveItem" mnemonicParsing="false" onAction="#saveItem" text="Save" />
-      					</items>
-      				</Menu>
-      				<Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
-      					<items>
-      						<MenuItem fx:id="aboutItem" mnemonicParsing="false" onAction="#aboutItem" text="About" />
-      					</items>
-      				</Menu>
-      			</menus>
-      		</MenuBar>
       		<Text layoutX="64.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to the Animal Game!">
       			<font>
       				<Font size="26.0" />
       			</font>
       		</Text>
-            <Button fx:id="startButton" layoutX="169.0" layoutY="200.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="142.0" text="Start" />
+            <Button fx:id="startButton" layoutX="169.0" layoutY="200.0" mnemonicParsing="false" onAction="#start" prefHeight="35.0" prefWidth="142.0" text="Start" />
+         </children>
+      </Pane>
+      <Pane fx:id="questionPane" layoutY="23.0" prefHeight="377.0" prefWidth="479.0">
+         <children>
+            <Text fx:id="questionText" layoutX="63.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Button fx:id="yesButton" layoutX="170.0" layoutY="200.0" mnemonicParsing="false" onAction="#yesAction" prefHeight="35.0" prefWidth="52.0" text="Yes" />
+            <Button fx:id="noButton" layoutX="260.0" layoutY="200.0" mnemonicParsing="false" onAction="#noAction" prefHeight="35.0" prefWidth="52.0" text="No" />
+         </children>
+      </Pane>
+      <Pane fx:id="resultPane" layoutY="23.0" prefHeight="377.0" prefWidth="479.0">
+         <children>
+            <Text layoutX="181.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You Won!">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Label layoutX="96.0" layoutY="98.0" text="Enter the animal that you were playing with:" />
+            <TextField fx:id="animalField" layoutX="105.0" layoutY="126.0" prefHeight="25.0" prefWidth="276.0" />
+            <Label layoutX="93.0" layoutY="151.0" prefHeight="35.0" prefWidth="290.0" text="Enter a question that distinguishes your animal from the animal that was guessed:" wrapText="true" />
+            <TextField fx:id="questionField" layoutX="107.0" layoutY="202.0" prefHeight="25.0" prefWidth="276.0" />
+            <Label layoutX="87.0" layoutY="241.0" prefHeight="35.0" prefWidth="263.0" text="What is the answer to your question for the animal you were playing with?" wrapText="true" />
+            <HBox fx:id="radioGroup" alignment="CENTER_LEFT" layoutX="125.0" layoutY="285.0" prefHeight="35.0" prefWidth="113.0" spacing="20.0">
+               <children>
+                  <RadioButton fx:id="yesRadioButton" mnemonicParsing="false" text="Yes">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="answer" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="noRadioButton" mnemonicParsing="false" text="No" toggleGroup="$answer" />
+               </children>
+            </HBox>
+            <Button fx:id="submitButton" layoutX="183.0" layoutY="320.0" mnemonicParsing="false" onAction="#submitAction" prefHeight="25.0" prefWidth="113.0" text="Submit" />
+         </children>
+      </Pane>
+      <Pane fx:id="losingPane" layoutY="24.0" prefHeight="377.0" prefWidth="479.0">
+         <children>
+            <Text layoutX="180.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You Lost :(">
+               <font>
+                  <Font size="26.0" />
+               </font>
+            </Text>
+            <Button fx:id="playAgainButton" layoutX="108.0" layoutY="318.0" mnemonicParsing="false" onAction="#restartApp" text="Play Again" />
+            <Button fx:id="closeButton" layoutX="299.0" layoutY="318.0" mnemonicParsing="false" onAction="#closeApp" text="Close" />
          </children>
       </Pane>
 	</children>
