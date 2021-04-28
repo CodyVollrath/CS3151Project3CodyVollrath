@@ -171,8 +171,6 @@ public class AnimalGameCodeBehind {
     	boolean answerToQuestion = this.isYesSelected();
     	this.controller.addQuestionToTree(question, animal, answerToQuestion);
     	this.restart();
-    	
-    	
     }
     
     @FXML
