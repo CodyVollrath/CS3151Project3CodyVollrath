@@ -6,13 +6,16 @@ import edu.westga.cs3151.animalgame.resources.Resources;
 /**
  * GameTree
  *
- * @author 
+ * @author Cody Vollrath
  */
 public class GameTree {
 
 	private GameNode root;
 	private GameNode currentNode;
 
+	/**
+	 * Creates an instance of the GameTree object
+	 */
 	public GameTree() {
 		
 		this.root = new GameNode(Resources.ROOT_QUESTION);
@@ -27,6 +30,16 @@ public class GameTree {
 		this.currentNode = this.root;
 	}
 	
+	/**
+	 * 
+	 * @param question the question to be added
+	 * @param answer the answer associated with the question
+	 * @param whichSide the left or right side flag to indicate which side of the question the answer belongs to
+	 * 
+	 * @pre question != null && answer != null
+	 * @post question gets added to the tree
+	 * 
+	 */
 	public void addQuestion(String question, String answer, boolean whichSide) {
 		if (question == null) {
 			throw new IllegalArgumentException();
@@ -56,6 +69,11 @@ public class GameTree {
 		}
 	}
 	
+	
+	/**
+	 * Gets the value of the currently activated node
+	 * @return the value associated with the current node that is activated in the tree
+	 */
 	public String getCurrentValue() {
 		String value = this.currentNode.getValue();
 		if (this.currentNode.isLeaf()) {
@@ -64,6 +82,11 @@ public class GameTree {
 		return value;
 	}
 	
+	/**
+	 * Move to next node based on passed in flag indicated which node to traverse to
+	 * @param isLeft indicates which side to move to
+	 * @return the value of the node traveled to
+	 */
 	public String moveToNextNode(boolean isLeft) {
 		if (this.currentNode.isLeaf()) {
 			return null;
@@ -78,10 +101,18 @@ public class GameTree {
 		return this.getCurrentValue();
 	}
 	
+	/**
+	 * Resets the current node back to the root node
+	 */
 	public void reset() {
 		this.currentNode = this.root;
 	}
 	
+	/**
+	 * Creates a tree from a string with a particular organized structure
+	 * @param treeData the data of the tree in the form of a string
+	 * @return the boolean value indicating if the load was successful
+	 */
 	public boolean createTreeFromData(String treeData) {
 		if (treeData == null) {
 			throw new IllegalArgumentException();
@@ -95,6 +126,10 @@ public class GameTree {
 		
 	}
 	
+	/**
+	 * Gets a string representation of the tree in the order of a preordered traversed tree
+	 * @returns a string with the tree values in a preordered fashion
+	 */
 	@Override
 	public String toString() {
 		return this.getTreeInStringForm(this.root);
