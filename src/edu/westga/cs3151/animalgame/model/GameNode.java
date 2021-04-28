@@ -1,5 +1,7 @@
 package edu.westga.cs3151.animalgame.model;
 
+import edu.westga.cs3151.animalgame.resources.Resources;
+
 /**
  * This class keeps track of a value, and nodes that correspond to it such as a parent, a left node, and a right node
  * @author CodyVollrath
@@ -19,7 +21,7 @@ public class GameNode {
 	 */
 	public GameNode(String value) {
 		if (value == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(Resources.VALUE_NOT_NULL);
 		}
 		this.value = value;
 		this.parent = null;
@@ -40,10 +42,11 @@ public class GameNode {
 	 * @param value the value associated with the node
 	 * @pre none
 	 * @post getValue() == value
+	 * @throws IllegalArgumentException
 	 */
 	public void setValue(String value) {
 		if (value == null) {
-			throw new IllegalArgumentException("Value must not be null");
+			throw new IllegalArgumentException(Resources.VALUE_NOT_NULL);
 		}
 		this.value = value;
 	}

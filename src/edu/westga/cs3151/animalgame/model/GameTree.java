@@ -38,14 +38,14 @@ public class GameTree {
 	 * 
 	 * @pre question != null && answer != null
 	 * @post question gets added to the tree
-	 * 
+	 * @throws IllegalArgumentException
 	 */
 	public void addQuestion(String question, String answer, boolean whichSide) {
 		if (question == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Question must not be null");
 		}
 		if (answer == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Answer must not be null");
 		}
 		if (!this.currentNode.isLeaf()) {
 			return;

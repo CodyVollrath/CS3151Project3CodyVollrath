@@ -10,5 +10,9 @@ public class Resources {
 	public static final String SAVE_FILE_PRMOPT = "Save a File";
 	public static final String QUESTION_NODE_VALUE = "Q";
 	public static final String ANIMAL_NODE_VALUE = "A";
+	public static final String FILE_IO_ERROR = "File I/O Error";
+	public static final String FILE_WRITE_ERROR = "The file can not be written to!";
+	public static final String FILE_READ_ERROR = "The file can not be read from!";
+	public static final String VALUE_NOT_NULL = "Value must not be null";
 	
 }

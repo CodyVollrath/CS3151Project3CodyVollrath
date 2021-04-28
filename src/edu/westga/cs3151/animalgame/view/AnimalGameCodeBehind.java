@@ -8,6 +8,8 @@ import edu.westga.cs3151.animalgame.resources.Resources;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -121,15 +123,20 @@ public class AnimalGameCodeBehind {
     void loadItem(ActionEvent event) {
     	FileChooser fileChooser = this.getFileChooser();
     	File selectedFile = fileChooser.showOpenDialog(this.pane.getScene().getWindow());
-    	this.controller.loadFromFile(selectedFile);
-    	this.restart();
+    	if (!this.controller.loadFromFile(selectedFile)) {
+    		this.displayErrorMessageBox(Resources.FILE_IO_ERROR, Resources.FILE_READ_ERROR);
+    	} else {
+    		this.restart();
+    	}
     }
 
     @FXML
     void saveItem(ActionEvent event) {
     	FileChooser fileChooser = this.getFileChooser();
     	File createdFile = fileChooser.showSaveDialog(this.pane.getScene().getWindow());
-    	this.controller.writeToFile(createdFile);
+    	if (!this.controller.writeToFile(createdFile)) {
+    		this.displayErrorMessageBox(Resources.FILE_IO_ERROR, Resources.FILE_WRITE_ERROR);
+    	}
     }
     
     @FXML
@@ -214,6 +221,13 @@ public class AnimalGameCodeBehind {
     			new ExtensionFilter("Other Text Files", "*.txt", "*.csv"),
     			new ExtensionFilter("All Files", "*.*"));
     	return fileChooser;
+    }
+    
+    private void displayErrorMessageBox(String error, String content) {
+    	Alert alertBox = new Alert(AlertType.ERROR);
+    	alertBox.setTitle(error);
+    	alertBox.setContentText(content);
+    	alertBox.show();
     }
 
 }
