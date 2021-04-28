@@ -52,4 +52,7 @@ public class GameNode {
 		this.leftNode = node;
 	}
 	
+	public boolean hasTwoChildren() {
+		return this.leftNode != null && this.rightNode != null;
+	}
 }

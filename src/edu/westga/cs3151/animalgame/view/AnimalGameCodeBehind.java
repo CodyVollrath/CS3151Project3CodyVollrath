@@ -1,5 +1,6 @@
 package edu.westga.cs3151.animalgame.view;
 
+import java.io.File;
 import java.security.InvalidParameterException;
 
 import edu.westga.cs3151.animalgame.controller.AnimalGameController;
@@ -18,6 +19,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
 public class AnimalGameCodeBehind {
 
@@ -116,12 +119,17 @@ public class AnimalGameCodeBehind {
 
     @FXML
     void loadItem(ActionEvent event) {
-
+    	FileChooser fileChooser = this.getFileChooser();
+    	File selectedFile = fileChooser.showOpenDialog(this.pane.getScene().getWindow());
+    	this.controller.loadFromFile(selectedFile);
+    	this.restart();
     }
 
     @FXML
     void saveItem(ActionEvent event) {
-
+    	FileChooser fileChooser = this.getFileChooser();
+    	File createdFile = fileChooser.showSaveDialog(this.pane.getScene().getWindow());
+    	this.controller.writeToFile(createdFile);
     }
     
     @FXML
@@ -163,7 +171,6 @@ public class AnimalGameCodeBehind {
     	boolean answerToQuestion = this.isYesSelected();
     	this.controller.addQuestionToTree(question, animal, answerToQuestion);
     	this.restart();
-    	this.controller.print();
     	
     	
     }
@@ -199,6 +206,16 @@ public class AnimalGameCodeBehind {
     	} else {
     		throw new InvalidParameterException(Resources.RADIO_BUTTON_NOT_SELECTED);
     	}
+    }
+    
+    private FileChooser getFileChooser() {
+    	FileChooser fileChooser = new FileChooser();
+    	fileChooser.setTitle(Resources.SAVE_FILE_PRMOPT);
+    	fileChooser.getExtensionFilters().addAll(
+    			new ExtensionFilter("Animal Seperated Value", "*.asv"),
+    			new ExtensionFilter("Other Text Files", "*.txt", "*.csv"),
+    			new ExtensionFilter("All Files", "*.*"));
+    	return fileChooser;
     }
 
 }
