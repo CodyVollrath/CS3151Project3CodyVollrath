@@ -85,8 +85,8 @@ public class AnimalGameController {
 		if (file == null) {
 			return true;
 		}
-		try (FileReader reader = new FileReader(file.getAbsoluteFile());){
-			char[] treeDataChars = new char[(int)file.length()];
+		try (FileReader reader = new FileReader(file.getAbsoluteFile());) {
+			char[] treeDataChars = new char[(int) file.length()];
 			reader.read(treeDataChars);
 			String treeDataStr = new String(treeDataChars);
 			this.tree.createTreeFromData(treeDataStr);

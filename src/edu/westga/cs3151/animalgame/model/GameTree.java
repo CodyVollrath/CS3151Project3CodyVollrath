@@ -140,8 +140,8 @@ public class GameTree {
 		if (node != null) {
 			String letter = node.isLeaf() ? Resources.ANIMAL_NODE_VALUE : Resources.QUESTION_NODE_VALUE;
 			item = node.getValue() + "\n" + letter + "\n";
-			item += getTreeInStringForm(node.getLeft());
-			item += getTreeInStringForm(node.getRight());
+			item += this.getTreeInStringForm(node.getLeft());
+			item += this.getTreeInStringForm(node.getRight());
 		}
 		return item;
 	}
@@ -152,43 +152,38 @@ public class GameTree {
 		boolean isRightNode = false;
 		for (int i = 0; i < asvData.length; i++) {
 			String currentValue = asvData[i];
-			
-			boolean isLetterA = currentValue.equals(Resources.ANIMAL_NODE_VALUE);
-			boolean isLetterQ = currentValue.equals(Resources.QUESTION_NODE_VALUE);
-			boolean isLetter = isLetterA || isLetterQ;
+			boolean isLetter = currentValue.equals(Resources.ANIMAL_NODE_VALUE) || currentValue.equals(Resources.QUESTION_NODE_VALUE);
 			if (!isLetter) {
 				letter = asvData[i + 1];
 			}
 			if (!isLetter) {
-
 				if (i == 0) {
 					this.root = new GameNode(currentValue);
 					this.currentNode = this.root;
 				} else if (isRightNode) {
-					if (this.currentNode.hasTwoChildren()) {
-						this.currentNode = this.currentNode.getParent();
-						isRightNode = false;
-					}
+					this.goUpIfChildrenExist();
 					this.currentNode.setRight(new GameNode(currentValue));
 					this.currentNode.getRight().setParent(this.currentNode);
 					this.currentNode = this.currentNode.getRight();
 					isRightNode = false;
 				} else if (!isRightNode) {
-					if (this.currentNode.hasTwoChildren()) {
-						this.currentNode = this.currentNode.getParent();
-						isRightNode = false;
-					}
+					this.goUpIfChildrenExist();
 					this.currentNode.setLeft(new GameNode(currentValue));
 					GameNode currentNode = this.currentNode;
 					this.currentNode.getLeft().setParent(currentNode);
 					this.currentNode = this.currentNode.getLeft();
 				}
-				
 				if (letter.equals(Resources.ANIMAL_NODE_VALUE)) {
 					this.currentNode = this.currentNode.getParent();
 					isRightNode = true;
 				}
 			}
+		}
+	}
+	
+	private void goUpIfChildrenExist() {
+		if (this.currentNode.hasTwoChildren()) {
+			this.currentNode = this.currentNode.getParent();
 		}
 	}
 }

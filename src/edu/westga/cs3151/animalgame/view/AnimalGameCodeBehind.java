@@ -191,9 +191,9 @@ public class AnimalGameCodeBehind {
     }
     
     private boolean areAllFieldsFilled() {
-    	return (!this.animalField.textProperty().isEmpty().get() && 
-    			!this.questionField.textProperty().isEmpty().get() && 
-    			(this.yesRadioButton.isSelected() || this.noRadioButton.isSelected()));
+    	return (!this.animalField.textProperty().isEmpty().get() 
+    			&& !this.questionField.textProperty().isEmpty().get() 
+    			&& (this.yesRadioButton.isSelected() || this.noRadioButton.isSelected()));
     }
     
     private boolean isYesSelected() {
