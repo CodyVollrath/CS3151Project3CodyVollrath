@@ -113,45 +113,45 @@ public class GameTree {
 	
 	private void createTreeFromString(String treeData) {
 		String[] asvData = treeData.split("\n");
-		boolean isRight = false;
-		boolean goUp = false;
 		String letter = "";
+		boolean isRightNode = false;
 		for (int i = 0; i < asvData.length; i++) {
-			boolean isLetter = asvData[i].equals(Resources.ANIMAL_NODE_VALUE) || asvData[i].equals(Resources.QUESTION_NODE_VALUE);
+			String currentValue = asvData[i];
+			
+			boolean isLetterA = currentValue.equals(Resources.ANIMAL_NODE_VALUE);
+			boolean isLetterQ = currentValue.equals(Resources.QUESTION_NODE_VALUE);
+			boolean isLetter = isLetterA || isLetterQ;
 			if (!isLetter) {
 				letter = asvData[i + 1];
+			}
+			if (!isLetter) {
+
 				if (i == 0) {
-					this.root = new GameNode(asvData[i]);
+					this.root = new GameNode(currentValue);
 					this.currentNode = this.root;
-				} else if (isRight && goUp) {
+				} else if (isRightNode) {
+					if (this.currentNode.hasTwoChildren()) {
+						this.currentNode = this.currentNode.getParent();
+						isRightNode = false;
+					}
+					this.currentNode.setRight(new GameNode(currentValue));
+					this.currentNode.getRight().setParent(this.currentNode);
+					this.currentNode = this.currentNode.getRight();
+					isRightNode = false;
+				} else if (!isRightNode) {
+					if (this.currentNode.hasTwoChildren()) {
+						this.currentNode = this.currentNode.getParent();
+						isRightNode = false;
+					}
+					this.currentNode.setLeft(new GameNode(currentValue));
+					GameNode currentNode = this.currentNode;
+					this.currentNode.getLeft().setParent(currentNode);
+					this.currentNode = this.currentNode.getLeft();
+				}
+				
+				if (letter.equals(Resources.ANIMAL_NODE_VALUE)) {
 					this.currentNode = this.currentNode.getParent();
-					this.currentNode.setRight(new GameNode(asvData[i]));
-					this.currentNode.getRight().setParent(this.currentNode);
-					if (letter.equals(Resources.ANIMAL_NODE_VALUE)) {
-						isRight = true;
-						goUp = false;
-					} else {
-						this.currentNode = this.currentNode.getRight();
-						isRight = false;
-					}
-				} else if (isRight && !goUp) {
-					this.currentNode.setRight(new GameNode(asvData[i]));
-					this.currentNode.getRight().setParent(this.currentNode);
-					if (letter.equals(Resources.ANIMAL_NODE_VALUE)) {
-						isRight = true;
-						goUp = true;
-					} else {
-						this.currentNode = this.currentNode.getRight();
-						isRight = false;
-					}
-				} else if (!isRight && !goUp) {
-					this.currentNode.setLeft(new GameNode(asvData[i]));
-					this.currentNode.getLeft().setParent(this.currentNode);
-					if (letter.equals(Resources.ANIMAL_NODE_VALUE)) {
-						isRight = true;
-					} else {
-						this.currentNode = this.currentNode.getLeft();
-					}
+					isRightNode = true;
 				}
 			}
 		}

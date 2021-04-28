@@ -56,7 +56,6 @@ public class AnimalGameController {
 			String treeDataStr = new String(treeDataChars);
 			this.tree.createTreeFromData(treeDataStr);
 			reader.close();
-			System.out.println(this.tree);
 			return true;
 		} catch (IOException e) {
 			return false;
