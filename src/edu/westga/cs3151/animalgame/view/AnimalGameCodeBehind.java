@@ -116,7 +116,11 @@ public class AnimalGameCodeBehind {
 
     @FXML
     void aboutItem(ActionEvent event) {
-
+    	Alert alertBox = new Alert(AlertType.INFORMATION);
+    	alertBox.setTitle(Resources.ABOUT_TITLE);
+    	alertBox.setHeaderText(Resources.ABOUT_TITLE);
+    	alertBox.setContentText(Resources.ABOUT_CONTENT);
+    	alertBox.show();
     }
 
     @FXML
@@ -227,6 +231,7 @@ public class AnimalGameCodeBehind {
     private void displayErrorMessageBox(String error, String content) {
     	Alert alertBox = new Alert(AlertType.ERROR);
     	alertBox.setTitle(error);
+    	alertBox.setHeaderText(error);
     	alertBox.setContentText(content);
     	alertBox.show();
     }
