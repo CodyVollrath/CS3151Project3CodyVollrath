@@ -195,6 +195,7 @@ public class AnimalGameCodeBehind {
     	this.questionPane.setVisible(false);
     	this.resultPane.setVisible(false);
     	this.losingPane.setVisible(false);
+    	this.clearFields();
     }
     
     private boolean areAllFieldsFilled() {
@@ -229,5 +230,13 @@ public class AnimalGameCodeBehind {
     	alertBox.setContentText(content);
     	alertBox.show();
     }
-
+    
+    private void clearFields() {
+    	this.animalField.clear();
+    	this.questionField.clear();
+    	if (this.yesRadioButton.isSelected() || this.noRadioButton.isSelected()) {
+    		this.yesRadioButton.setSelected(false);
+    		this.noRadioButton.setSelected(false);
+    	}
+    }
 }
