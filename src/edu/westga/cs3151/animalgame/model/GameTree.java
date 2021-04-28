@@ -4,7 +4,7 @@ package edu.westga.cs3151.animalgame.model;
 import edu.westga.cs3151.animalgame.resources.Resources;
 
 /**
- * GameTree
+ * GameTree keeps track of the nodes in a Binary Search Tree like fashion
  *
  * @author Cody Vollrath
  */
