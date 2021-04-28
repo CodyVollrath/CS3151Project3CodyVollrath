@@ -31,7 +31,7 @@ public class GameTree {
 	}
 	
 	/**
-	 * 
+	 * Adds a question to the tree
 	 * @param question the question to be added
 	 * @param answer the answer associated with the question
 	 * @param whichSide the left or right side flag to indicate which side of the question the answer belongs to
